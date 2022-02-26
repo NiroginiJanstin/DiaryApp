@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const register());
+  runApp(register());
 }
 
 // ignore: camel_case_types
 class register extends StatelessWidget {
-  const register({Key? key}) : super(key: key);
 
   double getSmallDiameter(BuildContext context) =>
       MediaQuery.of(context).size.width * 2 / 3;
@@ -75,14 +74,14 @@ class register extends StatelessWidget {
                       color: Colors.white,
                       //border: Border.all(color: Colors.grey),
                       borderRadius: BorderRadius.circular(10)),
-                  margin: const EdgeInsets.fromLTRB(20, 300, 20, 10),
+                  margin: const EdgeInsets.fromLTRB(20, 250, 20, 10),
                   padding: const EdgeInsets.fromLTRB(10, 0, 10, 25),
                   child: Column(
                     children: <Widget>[
                       TextField(
                         decoration: InputDecoration(
                             icon: const Icon(
-                              Icons.verified_user,
+                              Icons.man,
                               color: Color.fromARGB(255, 36, 109, 218),
                             ),
                             focusedBorder: UnderlineInputBorder(
@@ -122,8 +121,9 @@ class register extends StatelessWidget {
                     ],
                   ),
                 ),
+                
                 Container(
-                  margin: const EdgeInsets.fromLTRB(20, 0, 20, 30),
+                  margin: const EdgeInsets.fromLTRB(20, 30, 20, 30),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
@@ -136,11 +136,11 @@ class register extends StatelessWidget {
                             color: Colors.transparent,
                             child: InkWell(
                               borderRadius: BorderRadius.circular(20),
-                              splashColor: Colors.amber,
+                              splashColor: const Color.fromARGB(255, 209, 221, 224),
                               onTap: () {},
                               child: const Center(
                                 child: Text(
-                                  "Login",
+                                  "Register",
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.w700),

@@ -1,3 +1,4 @@
+import 'package:diary_app/register.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -75,7 +76,7 @@ class login extends StatelessWidget {
                       color: Colors.white,
                       //border: Border.all(color: Colors.grey),
                       borderRadius: BorderRadius.circular(10)),
-                  margin: const EdgeInsets.fromLTRB(20, 300, 20, 10),
+                  margin: const EdgeInsets.fromLTRB(20, 260, 20, 10),
                   padding: const EdgeInsets.fromLTRB(10, 0, 10, 25),
                   child: Column(
                     children: <Widget>[
@@ -120,7 +121,7 @@ class login extends StatelessWidget {
                               fontSize: 11),
                         ))),
                 Container(
-                  margin: const EdgeInsets.fromLTRB(20, 0, 20, 30),
+                  margin: const EdgeInsets.fromLTRB(20, 10, 20, 30),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
@@ -133,7 +134,7 @@ class login extends StatelessWidget {
                             color: Colors.transparent,
                             child: InkWell(
                               borderRadius: BorderRadius.circular(20),
-                              splashColor: Colors.amber,
+                              splashColor: const Color.fromARGB(255, 209, 221, 224),
                               onTap: () {},
                               child: const Center(
                                 child: Text(
@@ -168,17 +169,26 @@ class login extends StatelessWidget {
                           fontSize: 11,
                           color: Colors.grey,
                           fontWeight: FontWeight.w500),
-                    ),
-                    
-                    Text(
-                      " Register",
-                      
-                      style: TextStyle(
-                          fontSize: 11,
-                          color: Color.fromARGB(255, 36, 109, 218),
-                          fontWeight: FontWeight.w700),
                     )
                   ],
+                ),
+                InkWell(
+                  borderRadius: BorderRadius.circular(20),
+                  splashColor: const Color.fromARGB(255, 209, 221, 224),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => register()),
+                    );
+                  },
+                  child: const Center(
+                    child: Text(
+                      "Register",
+                      style: TextStyle(
+                          color: Color.fromARGB(255, 36, 109, 218),
+                          fontWeight: FontWeight.w700),
+                    ),
+                  ),
                 )
               ],
             ),
