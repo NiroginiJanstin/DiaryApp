@@ -19,6 +19,16 @@ class header extends StatelessWidget {
       backgroundColor: const Color(0xFFEEEEEE),
       body: Stack(children: <Widget>[
         Positioned(
+          right: -getBiglDiameter(context) / 2,
+          bottom: -getBiglDiameter(context) / 2,
+          child: Container(
+            width: getBiglDiameter(context),
+            height: getBiglDiameter(context),
+            decoration: const BoxDecoration(
+                shape: BoxShape.circle, color: Color(0xFFF3E9EE)),
+          ),
+        ),
+        Positioned(
           right: -getSmallDiameter(context) / 3,
           top: -getSmallDiameter(context) / 3,
           child: Container(
