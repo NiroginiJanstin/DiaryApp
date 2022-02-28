@@ -1,4 +1,5 @@
 import 'package:diary_app/common/header.dart';
+import 'package:diary_app/common/home.dart';
 import 'package:diary_app/user/register.dart';
 import 'package:flutter/material.dart';
 
@@ -22,16 +23,6 @@ class login extends StatelessWidget {
       body: Stack(
         children: <Widget>[
           const header(),
-          Positioned(
-            right: -getBiglDiameter(context) / 2,
-            bottom: -getBiglDiameter(context) / 2,
-            child: Container(
-              width: getBiglDiameter(context),
-              height: getBiglDiameter(context),
-              decoration: const BoxDecoration(
-                  shape: BoxShape.circle, color: Color(0xFFF3E9EE)),
-            ),
-          ),
           Align(
             alignment: Alignment.bottomCenter,
             child: ListView(
@@ -99,8 +90,15 @@ class login extends StatelessWidget {
                             color: Colors.transparent,
                             child: InkWell(
                               borderRadius: BorderRadius.circular(20),
-                              splashColor: const Color.fromARGB(255, 209, 221, 224),
-                              onTap: () {},
+                              splashColor:
+                                  const Color.fromARGB(255, 209, 221, 224),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const home()),
+                                );
+                              },
                               child: const Center(
                                 child: Text(
                                   "Login",
