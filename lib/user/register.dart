@@ -1,13 +1,12 @@
-import 'package:diary_app/register.dart';
+import 'package:diary_app/common/header.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const login());
+  runApp(register());
 }
 
 // ignore: camel_case_types
-class login extends StatelessWidget {
-  const login({Key? key}) : super(key: key);
+class register extends StatelessWidget {
 
   double getSmallDiameter(BuildContext context) =>
       MediaQuery.of(context).size.width * 2 / 3;
@@ -20,53 +19,7 @@ class login extends StatelessWidget {
       backgroundColor: const Color(0xFFEEEEEE),
       body: Stack(
         children: <Widget>[
-          Positioned(
-            right: -getSmallDiameter(context) / 3,
-            top: -getSmallDiameter(context) / 3,
-            child: Container(
-              width: getSmallDiameter(context),
-              height: getSmallDiameter(context),
-              decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  gradient: LinearGradient(colors: [
-                    Color.fromARGB(255, 126, 212, 247),
-                    Color.fromARGB(255, 36, 109, 218)
-                  ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
-            ),
-          ),
-          Positioned(
-            left: -getBiglDiameter(context) / 6,
-            top: -getBiglDiameter(context) / 4,
-            child: Container(
-              child: const Center(
-                child: Text(
-                  "Smart Diary",
-                  style: TextStyle(
-                      fontFamily: "Pacifico",
-                      fontSize: 36,
-                      color: Colors.white),
-                ),
-              ),
-              width: getBiglDiameter(context),
-              height: getBiglDiameter(context),
-              decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  gradient: LinearGradient(colors: [
-                    Color.fromARGB(255, 126, 212, 247),
-                    Color.fromARGB(255, 36, 109, 218)
-                  ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
-            ),
-          ),
-          Positioned(
-            right: -getBiglDiameter(context) / 2,
-            bottom: -getBiglDiameter(context) / 2,
-            child: Container(
-              width: getBiglDiameter(context),
-              height: getBiglDiameter(context),
-              decoration: const BoxDecoration(
-                  shape: BoxShape.circle, color: Color(0xFFF3E9EE)),
-            ),
-          ),
+          const header(),
           Align(
             alignment: Alignment.bottomCenter,
             child: ListView(
@@ -76,10 +29,23 @@ class login extends StatelessWidget {
                       color: Colors.white,
                       //border: Border.all(color: Colors.grey),
                       borderRadius: BorderRadius.circular(10)),
-                  margin: const EdgeInsets.fromLTRB(20, 260, 20, 10),
+                  margin: const EdgeInsets.fromLTRB(20, 250, 20, 10),
                   padding: const EdgeInsets.fromLTRB(10, 0, 10, 25),
                   child: Column(
                     children: <Widget>[
+                      TextField(
+                        decoration: InputDecoration(
+                            icon: const Icon(
+                              Icons.man,
+                              color: Color.fromARGB(255, 36, 109, 218),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.grey.shade100)),
+                            labelText: "Name",
+                            enabledBorder: InputBorder.none,
+                            labelStyle: const TextStyle(color: Colors.grey)),
+                      ),
                       TextField(
                         decoration: InputDecoration(
                             icon: const Icon(
@@ -110,18 +76,9 @@ class login extends StatelessWidget {
                     ],
                   ),
                 ),
-                Align(
-                    alignment: Alignment.centerRight,
-                    child: Container(
-                        margin: const EdgeInsets.fromLTRB(0, 0, 20, 10),
-                        child: const Text(
-                          "FORGOT PASSWORD?",
-                          style: TextStyle(
-                              color: Color.fromARGB(255, 36, 109, 218),
-                              fontSize: 11),
-                        ))),
+                
                 Container(
-                  margin: const EdgeInsets.fromLTRB(20, 10, 20, 30),
+                  margin: const EdgeInsets.fromLTRB(20, 30, 20, 30),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
@@ -138,7 +95,7 @@ class login extends StatelessWidget {
                               onTap: () {},
                               child: const Center(
                                 child: Text(
-                                  "Login",
+                                  "Register",
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.w700),
@@ -160,36 +117,6 @@ class login extends StatelessWidget {
                     ],
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const <Widget>[
-                    Text(
-                      "DON'T HAVE AN ACCOUNT ? ",
-                      style: TextStyle(
-                          fontSize: 11,
-                          color: Colors.grey,
-                          fontWeight: FontWeight.w500),
-                    )
-                  ],
-                ),
-                InkWell(
-                  borderRadius: BorderRadius.circular(20),
-                  splashColor: const Color.fromARGB(255, 209, 221, 224),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => register()),
-                    );
-                  },
-                  child: const Center(
-                    child: Text(
-                      "Register",
-                      style: TextStyle(
-                          color: Color.fromARGB(255, 36, 109, 218),
-                          fontWeight: FontWeight.w700),
-                    ),
-                  ),
-                )
               ],
             ),
           )
