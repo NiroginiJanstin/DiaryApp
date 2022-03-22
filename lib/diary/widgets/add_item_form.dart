@@ -1,6 +1,6 @@
+import 'package:diary_app/utils/diary_collection_crud.dart';
 import 'package:flutter/material.dart';
 import 'package:diary_app/res/custom_colors.dart';
-import 'package:diary_app/utils/database.dart';
 import 'package:diary_app/utils/validator.dart';
 
 import 'custom_form_field.dart';
@@ -148,7 +148,7 @@ class _AddItemFormState extends State<AddItemForm> {
                           _isProcessing = true;
                         });
 
-                        await Database.addItem(
+                        await DiaryCrud.addItem(
                           dateTime: _dateTimeController.text,
                           title: _titleController.text,
                           note: _descriptionController.text,
