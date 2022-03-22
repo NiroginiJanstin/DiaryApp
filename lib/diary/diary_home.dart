@@ -1,94 +1,51 @@
-import 'package:diary_app/common/header.dart';
+import 'package:diary_app/common/home.dart';
+import 'package:diary_app/diary/add_record.dart';
 import 'package:diary_app/diary/widgets/list_item.dart';
 import 'package:flutter/material.dart';
+import 'package:diary_app/res/custom_colors.dart';
+// import 'package:diary_app/screens/add_screen.dart';
+// import 'package:diary_app/widgets/app_bar_title.dart';
+// import 'package:diary_app/widgets/item_list.dart';
 
-void main() {
-  runApp(const diaryHome());
+class diaryHome extends StatefulWidget {
+  @override
+  _diaryHomeState createState() => _diaryHomeState();
 }
 
-// ignore: camel_case_types
-class diaryHome extends StatelessWidget {
-  const diaryHome({Key? key}) : super(key: key);
+class _diaryHomeState extends State<diaryHome> {
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("My Diary")),
-      body:  Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            flex: 2,
-            child: SingleChildScrollView(
-              child: Column(
-                children: const [
-                  ListItem(),
-                  ListItem(),
-                  ListItem(),
-                  ListItem(),
-                  ListItem(),
-                  ListItem(),
-                  ListItem(),
-                  ListItem(),
-                  ListItem(),
-                ],
-              ),
-            ),
-          ),
-        ],
+      backgroundColor: CustomColors.firebaseNavy,
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: CustomColors.firebaseNavy,
+        title: Text("Diary Records"),
       ),
-      drawer: Drawer(
-        child: ListView(
-          // Important: Remove any padding from the ListView.
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            const UserAccountsDrawerHeader(
-              accountName: Text("Nirogini Albertjanstin"),
-              accountEmail: Text("nirogininiro0@gmail.com"),
-              currentAccountPicture: CircleAvatar(
-                backgroundColor: Colors.orange,
-                child: Text(
-                  "N",
-                  style: TextStyle(fontSize: 40.0),
-                ),
-              ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => AddScreen(),
             ),
-            ListTile(
-              leading: const Icon(Icons.home),
-              title: const Text("Home"),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.book),
-              title: const Text("My Diary"),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.local_activity),
-              title: const Text("ToDo"),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.alarm),
-              title: const Text("Reminder"),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.contacts),
-              title: const Text("Contact Us"),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-          ],
+          );
+        },
+        backgroundColor: CustomColors.firebaseOrange,
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+          size: 32,
+        ),
+      ),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.only(
+            left: 16.0,
+            right: 16.0,
+            bottom: 20.0,
+          ),
+          child: ListItem(),
         ),
       ),
     );
