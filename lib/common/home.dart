@@ -47,7 +47,7 @@ class home extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const diaryHome()),
+                  MaterialPageRoute(builder: (context) => diaryHome()),
                 );
               },
             ),
