@@ -12,15 +12,10 @@ class home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Home")),
-      body: const Center(
-          child: Text(
-        'Home',
-        style: TextStyle(fontSize: 20.0),
-      )),
+      appBar: AppBar(title: const Text("My Dairy")),
+      body: Center(child: diaryHome()),
       drawer: Drawer(
         child: ListView(
-          // Important: Remove any padding from the ListView.
           padding: EdgeInsets.zero,
           children: <Widget>[
             const UserAccountsDrawerHeader(
@@ -35,8 +30,8 @@ class home extends StatelessWidget {
               ),
             ),
             ListTile(
-              leading: const Icon(Icons.home),
-              title: const Text("Home"),
+              leading: const Icon(Icons.person),
+              title: const Text("My Profile"),
               onTap: () {
                 Navigator.pop(context);
               },
@@ -45,22 +40,12 @@ class home extends StatelessWidget {
               leading: const Icon(Icons.book),
               title: const Text("My Diary"),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => diaryHome()),
-                );
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.local_activity),
-              title: const Text("ToDo"),
-              onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              leading: const Icon(Icons.alarm),
-              title: const Text("Reminder"),
+              leading: const Icon(Icons.local_activity),
+              title: const Text("To-do"),
               onTap: () {
                 Navigator.pop(context);
               },

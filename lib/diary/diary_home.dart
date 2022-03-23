@@ -16,13 +16,8 @@ class _diaryHomeState extends State<diaryHome> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold( 
       backgroundColor: CustomColors.firebaseNavy,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: CustomColors.firebaseNavy,
-        title: Text("Diary Records"),
-      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).push(
@@ -41,6 +36,7 @@ class _diaryHomeState extends State<diaryHome> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(
+            top : 20,
             left: 16.0,
             right: 16.0,
             bottom: 20.0,
