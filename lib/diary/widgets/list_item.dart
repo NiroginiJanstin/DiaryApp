@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:diary_app/utils/diary_collection_crud.dart';
 import 'package:flutter/material.dart';
 import '../../res/custom_colors.dart';
+import '../edit_record.dart';
 
 class ListItem extends StatelessWidget {
   @override
@@ -16,12 +17,13 @@ class ListItem extends StatelessWidget {
             separatorBuilder: (context, index) => SizedBox(height: 16.0),
             itemCount: snapshot.data!.docs.length,
             itemBuilder: (context, index) {
-              var noteInfo = snapshot.data!.docs[index].data()! as Map<String, dynamic>;
+              var noteInfo =
+                  snapshot.data!.docs[index].data()! as Map<String, dynamic>;
               String docID = snapshot.data!.docs[index].id;
-              String dateTime = noteInfo['dateTime'].toString()  ;
+              String dateTime = noteInfo['dateTime'];
               String title = noteInfo['title'];
               String note = noteInfo['note'];
-
+              print(dateTime);
               return Ink(
                 decoration: BoxDecoration(
                   color: CustomColors.firebaseGrey,
@@ -31,17 +33,18 @@ class ListItem extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8.0),
                   ),
-                  // onTap: () => Navigator.of(context).push(
-                  //   MaterialPageRoute(
-                  //     builder: (context) => EditScreen(
-                  //       currentTitle: title,
-                  //       currentDescription: description,
-                  //       documentId: docID,
-                  //     ),
-                  //   ),
-                  // ),
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => EditScreen(
+                        currentDateTime: dateTime,
+                        currentTitle: title,
+                        currentDescription: note,
+                        documentId: docID,
+                      ),
+                    ),
+                  ),
                   title: Text(
-                    title,
+                    dateTime + "   " + title,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
