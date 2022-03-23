@@ -1,40 +1,64 @@
 import 'package:diary_app/utils/diary_collection_crud.dart';
 import 'package:flutter/material.dart';
-import 'package:diary_app/res/custom_colors.dart';
-import 'package:diary_app/utils/validator.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+
+import '../../res/custom_colors.dart';
+import '../../utils/validator.dart';
+import 'custom_form_field.dart';
 import 'package:intl/intl.dart';
 
-import 'custom_form_field.dart';
-
-class AddItemForm extends StatefulWidget {
+class EditItemForm extends StatefulWidget {
   final FocusNode dateFocusNode;
   final FocusNode titleFocusNode;
   final FocusNode descriptionFocusNode;
+  final String currentDate;
+  final String currentTitle;
+  final String currentDescription;
+  final String documentId;
 
-  const AddItemForm({
+  const EditItemForm({
     required this.dateFocusNode,
     required this.titleFocusNode,
     required this.descriptionFocusNode,
+    required this.currentTitle,
+    required this.currentDate,
+    required this.currentDescription,
+    required this.documentId,
   });
 
   @override
-  _AddItemFormState createState() => _AddItemFormState();
+  _EditItemFormState createState() => _EditItemFormState();
 }
 
-class _AddItemFormState extends State<AddItemForm> {
-  final _addItemFormKey = GlobalKey<FormState>();
+class _EditItemFormState extends State<EditItemForm> {
+  final _editItemFormKey = GlobalKey<FormState>();
 
   bool _isProcessing = false;
 
-  final TextEditingController _dateTimeController = TextEditingController();
-  final TextEditingController _titleController = TextEditingController();
-  final TextEditingController _descriptionController = TextEditingController();
+  late TextEditingController _dateTimeController;
+  late TextEditingController _titleController;
+  late TextEditingController _descriptionController;
+
+  @override
+  void initState() {
+    _dateTimeController = TextEditingController(
+      text: widget.currentDate,
+    );
+
+    _titleController = TextEditingController(
+      text: widget.currentTitle,
+    );
+
+    _descriptionController = TextEditingController(
+      text: widget.currentDescription,
+    );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: _addItemFormKey,
+      key: _editItemFormKey,
       child: Column(
         children: [
           Padding(
@@ -46,16 +70,6 @@ class _AddItemFormState extends State<AddItemForm> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 15.0),
-                Text(
-                  'Date',
-                  style: TextStyle(
-                    color: CustomColors.firebaseGrey,
-                    fontSize: 20.0,
-                    letterSpacing: 1,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
                 SizedBox(height: 8.0),
                 TextField(
                   controller:
@@ -82,6 +96,7 @@ class _AddItemFormState extends State<AddItemForm> {
                     }, currentTime: DateTime.now());
                   },
                 ),
+                SizedBox(height: 24.0),
                 Text(
                   'Title',
                   style: TextStyle(
@@ -154,16 +169,16 @@ class _AddItemFormState extends State<AddItemForm> {
                       ),
                     ),
                     onPressed: () async {
-                      widget.dateFocusNode.unfocus();
                       widget.titleFocusNode.unfocus();
                       widget.descriptionFocusNode.unfocus();
 
-                      if (_addItemFormKey.currentState!.validate()) {
+                      if (_editItemFormKey.currentState!.validate()) {
                         setState(() {
                           _isProcessing = true;
                         });
 
-                        await DiaryCrud.addItem(
+                        await DiaryCrud.updateItem(
+                          docId: widget.documentId,
                           dateTime: _dateTimeController.text,
                           title: _titleController.text,
                           note: _descriptionController.text,
@@ -179,7 +194,7 @@ class _AddItemFormState extends State<AddItemForm> {
                     child: Padding(
                       padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
                       child: Text(
-                        'ADD ITEM',
+                        'UPDATE ITEM',
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
