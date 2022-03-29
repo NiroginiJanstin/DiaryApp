@@ -7,15 +7,16 @@ final CollectionReference _recordsCollection =
 class DiaryCrud {
   static String? userUid;
 
-  static Future<void> addItem({
-    required String dateTime,
-    required String title,
-    required String note,
-  }) async {
+  static Future<void> addItem(
+      {required String dateTime,
+      required String title,
+      required String note,
+      required double rating}) async {
     Map<String, dynamic> data = <String, dynamic>{
       "dateTime": dateTime,
       "title": title,
       "note": note,
+      "rating": rating
     };
 
     await _recordsCollection
@@ -28,12 +29,14 @@ class DiaryCrud {
     required String dateTime,
     required String title,
     required String note,
+    required double rating,
     required String docId,
   }) async {
     Map<String, dynamic> data = <String, dynamic>{
       "docId": docId,
       "dateTime": dateTime,
       "title": title,
+      "rating": rating,
       "note": note,
     };
 

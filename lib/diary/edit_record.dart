@@ -8,12 +8,14 @@ class EditScreen extends StatefulWidget {
   final String currentDateTime;
   final String currentTitle;
   final String currentDescription;
+  final String currentRating;
   final String documentId;
 
   EditScreen({
     required this.currentDateTime,
     required this.currentTitle,
     required this.currentDescription,
+    required this.currentRating,
     required this.documentId,
   });
 
@@ -96,6 +98,7 @@ class _EditScreenState extends State<EditScreen> {
               currentDate: widget.currentDateTime,
               currentTitle: widget.currentTitle,
               currentDescription: widget.currentDescription,
+              currentRating : widget.currentRating
             ),
           ),
         ),
