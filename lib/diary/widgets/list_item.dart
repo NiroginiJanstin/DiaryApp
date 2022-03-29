@@ -3,6 +3,7 @@ import 'package:diary_app/utils/diary_collection_crud.dart';
 import 'package:flutter/material.dart';
 import '../../res/custom_colors.dart';
 import '../edit_record.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ListItem extends StatelessWidget {
   @override
@@ -23,7 +24,8 @@ class ListItem extends StatelessWidget {
               String dateTime = noteInfo['dateTime'];
               String title = noteInfo['title'];
               String note = noteInfo['note'];
-              print(dateTime);
+              double rate = noteInfo['rating'];
+              Icon icon = returnIcon(rate);
               return Ink(
                 decoration: BoxDecoration(
                   color: CustomColors.firebaseGrey,
@@ -39,14 +41,36 @@ class ListItem extends StatelessWidget {
                         currentDateTime: dateTime,
                         currentTitle: title,
                         currentDescription: note,
+                        currentRating : rate.toString(),
                         documentId: docID,
                       ),
                     ),
                   ),
-                  title: Text(
-                    dateTime + "   " + title,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+                  title: RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: title.toUpperCase(),
+                          style: GoogleFonts.lato(
+                            textStyle: Theme.of(context).textTheme.headline4,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                            fontStyle: FontStyle.normal,
+                          ),
+                        ),
+                        WidgetSpan(
+                            child: icon, style: const TextStyle(fontSize: 15)),
+                        TextSpan(
+                          text: dateTime,
+                          style: GoogleFonts.lato(
+                            textStyle: Theme.of(context).textTheme.headline3,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            fontStyle: FontStyle.italic,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   subtitle: Text(
                     note,
@@ -68,5 +92,40 @@ class ListItem extends StatelessWidget {
         );
       },
     );
+  }
+}
+
+Icon returnIcon(rate) {
+  switch (rate) {
+    case 0:
+      return const Icon(
+        Icons.sentiment_very_dissatisfied,
+        color: Colors.red,
+      );
+    case 1:
+      return const Icon(
+        Icons.sentiment_dissatisfied,
+        color: Colors.redAccent,
+      );
+    case 2:
+      return const Icon(
+        Icons.sentiment_neutral,
+        color: Colors.amber,
+      );
+    case 3:
+      return const Icon(
+        Icons.sentiment_satisfied,
+        color: Colors.lightGreen,
+      );
+    case 4:
+      return const Icon(
+        Icons.sentiment_very_satisfied,
+        color: Colors.green,
+      );
+    default:
+      return const Icon(
+        Icons.sentiment_very_satisfied,
+        color: Colors.green,
+      );
   }
 }
