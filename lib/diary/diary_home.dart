@@ -17,7 +17,6 @@ class _diaryHomeState extends State<diaryHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold( 
-      backgroundColor: CustomColors.firebaseNavy,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).push(

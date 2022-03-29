@@ -1,11 +1,17 @@
+import 'package:diary_app/diary/diary_home.dart';
 import 'package:diary_app/utils/diary_collection_crud.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import '../../res/custom_colors.dart';
 import '../../utils/validator.dart';
 import 'custom_form_field.dart';
 import 'package:intl/intl.dart';
+
+var date = "";
+var title = "";
+var note = "";
 
 class EditItemForm extends StatefulWidget {
   final FocusNode dateFocusNode;
@@ -14,6 +20,7 @@ class EditItemForm extends StatefulWidget {
   final String currentDate;
   final String currentTitle;
   final String currentDescription;
+  final String currentRating;
   final String documentId;
 
   const EditItemForm({
@@ -23,6 +30,7 @@ class EditItemForm extends StatefulWidget {
     required this.currentTitle,
     required this.currentDate,
     required this.currentDescription,
+    required this.currentRating,
     required this.documentId,
   });
 
@@ -57,6 +65,8 @@ class _EditItemFormState extends State<EditItemForm> {
 
   @override
   Widget build(BuildContext context) {
+    Icon icon = returnIcon(double.parse(widget.currentRating));
+
     return Form(
       key: _editItemFormKey,
       child: Column(
@@ -70,7 +80,8 @@ class _EditItemFormState extends State<EditItemForm> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 8.0),
+                icon,
+                SizedBox(height: 2.0),
                 TextField(
                   controller:
                       _dateTimeController, //editing controller of this TextField
@@ -96,7 +107,7 @@ class _EditItemFormState extends State<EditItemForm> {
                     }, currentTime: DateTime.now());
                   },
                 ),
-                SizedBox(height: 24.0),
+                SizedBox(height: 10.0),
                 Text(
                   'Title',
                   style: TextStyle(
@@ -106,7 +117,7 @@ class _EditItemFormState extends State<EditItemForm> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 8.0),
+                SizedBox(height: 4.0),
                 CustomFormField(
                   isLabelEnabled: false,
                   controller: _titleController,
@@ -119,7 +130,7 @@ class _EditItemFormState extends State<EditItemForm> {
                   label: 'Title',
                   hint: 'Enter your note title',
                 ),
-                SizedBox(height: 24.0),
+                SizedBox(height: 10.0),
                 Text(
                   'Description',
                   style: TextStyle(
@@ -129,7 +140,7 @@ class _EditItemFormState extends State<EditItemForm> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 8.0),
+                SizedBox(height: 4.0),
                 CustomFormField(
                   maxLines: 10,
                   isLabelEnabled: false,
@@ -177,18 +188,17 @@ class _EditItemFormState extends State<EditItemForm> {
                           _isProcessing = true;
                         });
 
-                        await DiaryCrud.updateItem(
-                          docId: widget.documentId,
-                          dateTime: _dateTimeController.text,
-                          title: _titleController.text,
-                          note: _descriptionController.text,
-                        );
+                        date = _dateTimeController.text;
+                        title = _titleController.text;
+                        note = _descriptionController.text;
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) =>
+                                _buildPopupDialog(context, widget.documentId));
 
                         setState(() {
                           _isProcessing = false;
                         });
-
-                        Navigator.of(context).pop();
                       }
                     },
                     child: Padding(
@@ -209,4 +219,99 @@ class _EditItemFormState extends State<EditItemForm> {
       ),
     );
   }
+}
+
+Icon returnIcon(rate) {
+  switch (rate) {
+    case 0:
+      return const Icon(
+        Icons.sentiment_very_dissatisfied,
+        color: Colors.red,
+      );
+    case 1:
+      return const Icon(
+        Icons.sentiment_dissatisfied,
+        color: Colors.redAccent,
+      );
+    case 2:
+      return const Icon(
+        Icons.sentiment_neutral,
+        color: Colors.amber,
+      );
+    case 3:
+      return const Icon(
+        Icons.sentiment_satisfied,
+        color: Colors.lightGreen,
+      );
+    case 4:
+      return const Icon(
+        Icons.sentiment_very_satisfied,
+        color: Colors.green,
+      );
+    default:
+      return const Icon(
+        Icons.sentiment_very_satisfied,
+        color: Colors.green,
+      );
+  }
+}
+
+Widget _buildPopupDialog(BuildContext context, String docId) {
+  return AlertDialog(
+    title: const Text('Please rate your day'),
+    content: Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        RatingBar.builder(
+          initialRating: 3,
+          itemCount: 5,
+          itemBuilder: (context, index) {
+            switch (index) {
+              case 0:
+                return const Icon(
+                  Icons.sentiment_very_dissatisfied,
+                  color: Colors.red,
+                );
+              case 1:
+                return const Icon(
+                  Icons.sentiment_dissatisfied,
+                  color: Colors.redAccent,
+                );
+              case 2:
+                return const Icon(
+                  Icons.sentiment_neutral,
+                  color: Colors.amber,
+                );
+              case 3:
+                return const Icon(
+                  Icons.sentiment_satisfied,
+                  color: Colors.lightGreen,
+                );
+              case 4:
+                return const Icon(
+                  Icons.sentiment_very_satisfied,
+                  color: Colors.green,
+                );
+              default:
+                return const Icon(
+                  Icons.sentiment_very_satisfied,
+                  color: Colors.green,
+                );
+            }
+          },
+          onRatingUpdate: (rating) {
+            DiaryCrud.updateItem(
+                docId: docId,
+                dateTime: date,
+                title: title,
+                note: note,
+                rating: rating);
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => diaryHome()));
+          },
+        )
+      ],
+    ),
+  );
 }

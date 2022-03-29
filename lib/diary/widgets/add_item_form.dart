@@ -1,11 +1,20 @@
+// ignore_for_file: deprecated_member_use
+
+import 'package:diary_app/diary/diary.dart';
+import 'package:diary_app/diary/diary_home.dart';
 import 'package:diary_app/utils/diary_collection_crud.dart';
 import 'package:flutter/material.dart';
 import 'package:diary_app/res/custom_colors.dart';
 import 'package:diary_app/utils/validator.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import 'custom_form_field.dart';
+
+var date = "";
+var title = "";
+var note = "";
 
 class AddItemForm extends StatefulWidget {
   final FocusNode dateFocusNode;
@@ -163,17 +172,17 @@ class _AddItemFormState extends State<AddItemForm> {
                           _isProcessing = true;
                         });
 
-                        await DiaryCrud.addItem(
-                          dateTime: _dateTimeController.text,
-                          title: _titleController.text,
-                          note: _descriptionController.text,
+                        date = _dateTimeController.text;
+                        title = _titleController.text;
+                        note = _descriptionController.text;
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) =>
+                              _buildPopupDialog(context),
                         );
-
                         setState(() {
                           _isProcessing = false;
                         });
-
-                        Navigator.of(context).pop();
                       }
                     },
                     child: Padding(
@@ -194,4 +203,60 @@ class _AddItemFormState extends State<AddItemForm> {
       ),
     );
   }
+}
+
+Widget _buildPopupDialog(BuildContext context) {
+  return AlertDialog(
+    title: const Text('Please rate your day'),
+    content: Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        RatingBar.builder(
+          initialRating: 3,
+          itemCount: 5,
+          itemBuilder: (context, index) {
+            switch (index) {
+              case 0:
+                return const Icon(
+                  Icons.sentiment_very_dissatisfied,
+                  color: Colors.red,
+                );
+              case 1:
+                return const Icon(
+                  Icons.sentiment_dissatisfied,
+                  color: Colors.redAccent,
+                );
+              case 2:
+                return const Icon(
+                  Icons.sentiment_neutral,
+                  color: Colors.amber,
+                );
+              case 3:
+                return const Icon(
+                  Icons.sentiment_satisfied,
+                  color: Colors.lightGreen,
+                );
+              case 4:
+                return const Icon(
+                  Icons.sentiment_very_satisfied,
+                  color: Colors.green,
+                );
+              default:
+                return const Icon(
+                  Icons.sentiment_very_satisfied,
+                  color: Colors.green,
+                );
+            }
+          },
+          onRatingUpdate: (rating) {
+            DiaryCrud.addItem(
+                dateTime: date, title: title, note: note, rating: rating);
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => diaryHome()));
+          },
+        )
+      ],
+    ),
+  );
 }
