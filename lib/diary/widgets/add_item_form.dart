@@ -1,6 +1,5 @@
 // ignore_for_file: deprecated_member_use
 
-import 'package:diary_app/diary/diary.dart';
 import 'package:diary_app/diary/diary_home.dart';
 import 'package:diary_app/utils/diary_collection_crud.dart';
 import 'package:flutter/material.dart';
