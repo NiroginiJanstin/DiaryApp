@@ -43,45 +43,7 @@ class _EditScreenState extends State<EditScreen> {
         appBar: AppBar(
           elevation: 0,
           backgroundColor: CustomColors.firebaseNavy,
-          title: Text("Edit Record"),
-          actions: [
-            _isDeleting
-                ? Padding(
-                    padding: const EdgeInsets.only(
-                      top: 10.0,
-                      bottom: 10.0,
-                      right: 16.0,
-                    ),
-                    child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        Colors.redAccent,
-                      ),
-                      strokeWidth: 3,
-                    ),
-                  )
-                : IconButton(
-                    icon: Icon(
-                      Icons.delete,
-                      color: Colors.redAccent,
-                      size: 32,
-                    ),
-                    onPressed: () async {
-                      setState(() {
-                        _isDeleting = true;
-                      });
-
-                      await DiaryCrud.deleteItem(
-                        docId: widget.documentId,
-                      );
-
-                      setState(() {
-                        _isDeleting = false;
-                      });
-
-                      Navigator.of(context).pop();
-                    },
-                  ),
-          ],
+          title: Text("Edit  " + widget.currentTitle),
         ),
         body: SafeArea(
           child: Padding(
@@ -91,15 +53,14 @@ class _EditScreenState extends State<EditScreen> {
               bottom: 20.0,
             ),
             child: EditItemForm(
-              documentId: widget.documentId,
-              dateFocusNode: _dateTimeFocusNode,
-              titleFocusNode: _titleFocusNode,
-              descriptionFocusNode: _descriptionFocusNode,
-              currentDate: widget.currentDateTime,
-              currentTitle: widget.currentTitle,
-              currentDescription: widget.currentDescription,
-              currentRating : widget.currentRating
-            ),
+                documentId: widget.documentId,
+                dateFocusNode: _dateTimeFocusNode,
+                titleFocusNode: _titleFocusNode,
+                descriptionFocusNode: _descriptionFocusNode,
+                currentDate: widget.currentDateTime,
+                currentTitle: widget.currentTitle,
+                currentDescription: widget.currentDescription,
+                currentRating: widget.currentRating),
           ),
         ),
       ),

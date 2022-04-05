@@ -51,6 +51,10 @@ class DiaryCrud {
     return _recordsCollection.snapshots();
   }
 
+  static Stream<DocumentSnapshot> readOneItem(docId) {
+    return _recordsCollection.doc(docId).snapshots();
+  }
+
   static Future<void> deleteItem({
     required String docId,
   }) async {

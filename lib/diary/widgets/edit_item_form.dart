@@ -6,6 +6,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import '../../res/custom_colors.dart';
 import '../../utils/validator.dart';
+import '../common/get_rate_icon.dart';
 import 'custom_form_field.dart';
 import 'package:intl/intl.dart';
 
@@ -81,11 +82,11 @@ class _EditItemFormState extends State<EditItemForm> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 icon,
-                SizedBox(height: 2.0),
+                const SizedBox(height: 2.0),
                 TextField(
                   controller:
                       _dateTimeController, //editing controller of this TextField
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       icon: Icon(Icons.calendar_today), //icon of text field
                       labelText: "Enter Date" //label text of field
                       ),
@@ -100,14 +101,10 @@ class _EditItemFormState extends State<EditItemForm> {
                         _dateTimeController.text =
                             formattedDate; //set output date to TextField value.
                       });
-                      print('change $date in time zone ' +
-                          date.timeZoneOffset.inHours.toString());
-                    }, onConfirm: (date) {
-                      print('confirm $date');
-                    }, currentTime: DateTime.now());
+                    }, onConfirm: (date) {}, currentTime: DateTime.now());
                   },
                 ),
-                SizedBox(height: 10.0),
+                const SizedBox(height: 10.0),
                 Text(
                   'Title',
                   style: TextStyle(
@@ -117,7 +114,7 @@ class _EditItemFormState extends State<EditItemForm> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 4.0),
+                const SizedBox(height: 4.0),
                 CustomFormField(
                   isLabelEnabled: false,
                   controller: _titleController,
@@ -130,7 +127,7 @@ class _EditItemFormState extends State<EditItemForm> {
                   label: 'Title',
                   hint: 'Enter your note title',
                 ),
-                SizedBox(height: 10.0),
+                const SizedBox(height: 10.0),
                 Text(
                   'Description',
                   style: TextStyle(
@@ -140,7 +137,7 @@ class _EditItemFormState extends State<EditItemForm> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 4.0),
+                const SizedBox(height: 4.0),
                 CustomFormField(
                   maxLines: 10,
                   isLabelEnabled: false,
@@ -166,7 +163,7 @@ class _EditItemFormState extends State<EditItemForm> {
                     ),
                   ),
                 )
-              : Container(
+              : SizedBox(
                   width: double.maxFinite,
                   child: ElevatedButton(
                     style: ButtonStyle(
@@ -202,9 +199,9 @@ class _EditItemFormState extends State<EditItemForm> {
                       }
                     },
                     child: Padding(
-                      padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
+                      padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
                       child: Text(
-                        'UPDATE ITEM',
+                        'UPDATE',
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
@@ -218,41 +215,6 @@ class _EditItemFormState extends State<EditItemForm> {
         ],
       ),
     );
-  }
-}
-
-Icon returnIcon(rate) {
-  switch (rate) {
-    case 0:
-      return const Icon(
-        Icons.sentiment_very_dissatisfied,
-        color: Colors.red,
-      );
-    case 1:
-      return const Icon(
-        Icons.sentiment_dissatisfied,
-        color: Colors.redAccent,
-      );
-    case 2:
-      return const Icon(
-        Icons.sentiment_neutral,
-        color: Colors.amber,
-      );
-    case 3:
-      return const Icon(
-        Icons.sentiment_satisfied,
-        color: Colors.lightGreen,
-      );
-    case 4:
-      return const Icon(
-        Icons.sentiment_very_satisfied,
-        color: Colors.green,
-      );
-    default:
-      return const Icon(
-        Icons.sentiment_very_satisfied,
-        color: Colors.green,
-      );
   }
 }
 
