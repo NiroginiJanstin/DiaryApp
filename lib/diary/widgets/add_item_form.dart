@@ -54,7 +54,7 @@ class _AddItemFormState extends State<AddItemForm> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 15.0),
+                const SizedBox(height: 15.0),
                 Text(
                   'Date',
                   style: TextStyle(
@@ -64,11 +64,11 @@ class _AddItemFormState extends State<AddItemForm> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 8.0),
+                const SizedBox(height: 8.0),
                 TextField(
                   controller:
                       _dateTimeController, //editing controller of this TextField
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       icon: Icon(Icons.calendar_today), //icon of text field
                       labelText: "Enter Date" //label text of field
                       ),
@@ -99,7 +99,7 @@ class _AddItemFormState extends State<AddItemForm> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 8.0),
+                const SizedBox(height: 8.0),
                 CustomFormField(
                   isLabelEnabled: false,
                   controller: _titleController,
@@ -112,7 +112,7 @@ class _AddItemFormState extends State<AddItemForm> {
                   label: 'Title',
                   hint: 'Enter your note title',
                 ),
-                SizedBox(height: 24.0),
+                const SizedBox(height: 24.0),
                 Text(
                   'Description',
                   style: TextStyle(
@@ -122,7 +122,7 @@ class _AddItemFormState extends State<AddItemForm> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 8.0),
+                const SizedBox(height: 8.0),
                 CustomFormField(
                   maxLines: 10,
                   isLabelEnabled: false,
@@ -187,7 +187,7 @@ class _AddItemFormState extends State<AddItemForm> {
                     child: Padding(
                       padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
                       child: Text(
-                        'ADD ITEM',
+                        'ADD',
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,

@@ -1,11 +1,7 @@
-import 'package:diary_app/common/home.dart';
 import 'package:diary_app/diary/add_record.dart';
 import 'package:diary_app/diary/widgets/list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:diary_app/res/custom_colors.dart';
-// import 'package:diary_app/screens/add_screen.dart';
-// import 'package:diary_app/widgets/app_bar_title.dart';
-// import 'package:diary_app/widgets/item_list.dart';
 
 class diaryHome extends StatefulWidget {
   @override
@@ -13,10 +9,11 @@ class diaryHome extends StatefulWidget {
 }
 
 class _diaryHomeState extends State<diaryHome> {
+  TextEditingController _searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold( 
+    return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).push(
@@ -26,22 +23,31 @@ class _diaryHomeState extends State<diaryHome> {
           );
         },
         backgroundColor: CustomColors.firebaseOrange,
-        child: Icon(
+        child: const Icon(
           Icons.add,
           color: Colors.white,
           size: 32,
         ),
       ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(
-            top : 20,
-            left: 16.0,
-            right: 16.0,
-            bottom: 20.0,
-          ),
-          child: ListItem(),
-        ),
+      body: Column(
+        children: <Widget>[
+          Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                onChanged: (value) {},
+                controller: _searchController,
+                decoration: const InputDecoration(
+                    labelText: "Search",
+                    hintText: "Search",
+                    prefixIcon: Icon(Icons.search),
+                    suffixIcon: Icon(Icons.calendar_today),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(25.0)))),
+              )),
+          const Expanded(
+            child: ListItem(),
+          )
+        ],
       ),
     );
   }
