@@ -6,7 +6,7 @@ void main() {
 
 // ignore: camel_case_types
 class header extends StatelessWidget {
-  const header({Key? key}) : super(key: key);
+  const header({Key key}) : super(key: key);
 
   double getSmallDiameter(BuildContext context) =>
       MediaQuery.of(context).size.width * 2 / 3;

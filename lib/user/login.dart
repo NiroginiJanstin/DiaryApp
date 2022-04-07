@@ -8,7 +8,7 @@ void main() {
 }
 
 class login extends StatefulWidget {
-  const login({Key? key}) : super(key: key);
+  const login({Key key}) : super(key: key);
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -26,7 +26,7 @@ class _LoginScreenState extends State<login> {
   //final _auth = FirebaseAuth.instance;
 
   // string for displaying the error Message
-  String? errorMessage;
+  String errorMessage;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class _LoginScreenState extends State<login> {
         controller: emailController,
         keyboardType: TextInputType.emailAddress,
         validator: (value) {
-          if (value!.isEmpty) {
+          if (value.isEmpty) {
             return ("Please Enter Your Email");
           }
           // reg expression for email validation
@@ -47,7 +47,7 @@ class _LoginScreenState extends State<login> {
           return null;
         },
         onSaved: (value) {
-          emailController.text = value!;
+          emailController.text = value;
         },
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
@@ -66,7 +66,7 @@ class _LoginScreenState extends State<login> {
         obscureText: true,
         validator: (value) {
           RegExp regex = new RegExp(r'^.{6,}$');
-          if (value!.isEmpty) {
+          if (value.isEmpty) {
             return ("Password is required for login");
           }
           if (!regex.hasMatch(value)) {
@@ -74,7 +74,7 @@ class _LoginScreenState extends State<login> {
           }
         },
         onSaved: (value) {
-          passwordController.text = value!;
+          passwordController.text = value;
         },
         textInputAction: TextInputAction.done,
         decoration: InputDecoration(

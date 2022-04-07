@@ -1,5 +1,3 @@
-// ignore_for_file: unnecessary_const
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:diary_app/diary/common/get_rate_icon.dart';
 import 'package:diary_app/utils/diary_collection_crud.dart';
@@ -11,7 +9,7 @@ class ViewItem extends StatefulWidget {
   final String documentId;
 
   ViewItem({
-    required this.documentId,
+    this.documentId,
   });
 
   @override
@@ -19,8 +17,6 @@ class ViewItem extends StatefulWidget {
 }
 
 class _ViewScreenState extends State<ViewItem> {
-  final _viewItemFormKey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<DocumentSnapshot>(
@@ -29,7 +25,7 @@ class _ViewScreenState extends State<ViewItem> {
           if (snapshot.hasError) {
             return Text('Error = ${snapshot.error}');
           } else if (snapshot.hasData) {
-            var noteInfo = snapshot.data!.data()! as Map<String, dynamic>;
+            var noteInfo = snapshot.data.data() as Map<String, dynamic>;
             String dateTime = noteInfo['dateTime'];
             String title = noteInfo['title'];
             String note = noteInfo['note'];
@@ -41,7 +37,7 @@ class _ViewScreenState extends State<ViewItem> {
                 appBar: AppBar(
                   elevation: 0,
                   backgroundColor: CustomColors.firebaseNavy,
-                  title: Text("Add New Record"),
+                  title: Text(title),
                 ),
                 body: SafeArea(
                   child: Column(
@@ -87,8 +83,9 @@ class _ViewScreenState extends State<ViewItem> {
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
                                 color: Colors.blueAccent,
-                                border:
-                                    Border.all(color: Colors.red, width: 4.0),
+                                border: Border.all(
+                                    color: Color.fromARGB(255, 227, 143, 137),
+                                    width: 4.0),
                                 borderRadius: const BorderRadius.all(
                                     Radius.circular(8.0)),
                               ),
@@ -105,7 +102,7 @@ class _ViewScreenState extends State<ViewItem> {
                                   )),
                             ),
                             Container(
-                              width: 300,
+                              width: 350,
                               height: 200,
                               padding: const EdgeInsets.all(12),
                               alignment: Alignment.center,
@@ -128,12 +125,6 @@ class _ViewScreenState extends State<ViewItem> {
                                     ),
                                   )),
                             )
-                            // const SizedBox(height: 2.0),
-                            // Text(dateTime),
-                            // const SizedBox(height: 10.0),
-                            // Text(title),
-                            // const SizedBox(height: 4.0),
-                            // Text(note),
                           ],
                         ),
                       ),

@@ -1,5 +1,5 @@
 class Validator {
-  static String? validateField({required String value}) {
+  static String validateField({String value}) {
     if (value.isEmpty) {
       return 'Field can\'t be empty';
     }
@@ -7,7 +7,7 @@ class Validator {
     return null;
   }
 
-  static String? validateUserID({required String uid}) {
+  static String validateUserID({String uid}) {
     if (uid.isEmpty) {
       return 'User ID can\'t be empty';
     } else if (uid.length <= 3) {
