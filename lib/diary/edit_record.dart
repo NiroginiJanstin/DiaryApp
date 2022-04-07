@@ -39,31 +39,69 @@ class _EditScreenState extends State<EditScreen> {
         _descriptionFocusNode.unfocus();
       },
       child: Scaffold(
-        backgroundColor: CustomColors.firebaseNavy,
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: CustomColors.firebaseNavy,
-          title: Text("Edit  " + widget.currentTitle),
-        ),
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.only(
-              left: 16.0,
-              right: 16.0,
-              bottom: 20.0,
-            ),
-            child: EditItemForm(
-                documentId: widget.documentId,
-                dateFocusNode: _dateTimeFocusNode,
-                titleFocusNode: _titleFocusNode,
-                descriptionFocusNode: _descriptionFocusNode,
-                currentDate: widget.currentDateTime,
-                currentTitle: widget.currentTitle,
-                currentDescription: widget.currentDescription,
-                currentRating: widget.currentRating),
+          appBar: AppBar(
+            elevation: 0,
+            title: Text("Edit  " + widget.currentTitle),
+            actions: [
+              _isDeleting
+                  ? const Padding(
+                      padding: EdgeInsets.only(
+                        top: 10.0,
+                        bottom: 10.0,
+                        right: 16.0,
+                      ),
+                      child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          Colors.redAccent,
+                        ),
+                        strokeWidth: 3,
+                      ),
+                    )
+                  : IconButton(
+                      icon: const Icon(
+                        Icons.delete,
+                        color: Colors.redAccent,
+                        size: 32,
+                      ),
+                      onPressed: () async {
+                        setState(() {
+                          _isDeleting = true;
+                        });
+
+                        await DiaryCrud.deleteItem(
+                          docId: widget.documentId,
+                        );
+
+                        setState(() {
+                          _isDeleting = false;
+                        });
+
+                        Navigator.of(context).pop();
+                      },
+                    ),
+            ],
           ),
-        ),
-      ),
+          body: SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(),
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  left: 16.0,
+                  right: 16.0,
+                  bottom: 20.0,
+                ),
+                child: EditItemForm(
+                    documentId: widget.documentId,
+                    dateFocusNode: _dateTimeFocusNode,
+                    titleFocusNode: _titleFocusNode,
+                    descriptionFocusNode: _descriptionFocusNode,
+                    currentDate: widget.currentDateTime,
+                    currentTitle: widget.currentTitle,
+                    currentDescription: widget.currentDescription,
+                    currentRating: widget.currentRating),
+              ),
+            ),
+          )),
     );
   }
 }

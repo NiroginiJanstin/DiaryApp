@@ -17,6 +17,8 @@ class ViewItem extends StatefulWidget {
 }
 
 class _ViewScreenState extends State<ViewItem> {
+  bool _isDeleting = false;
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<DocumentSnapshot>(
@@ -33,10 +35,8 @@ class _ViewScreenState extends State<ViewItem> {
             Icon icon = returnIcon(rating);
 
             return Scaffold(
-                backgroundColor: CustomColors.firebaseNavy,
                 appBar: AppBar(
                   elevation: 0,
-                  backgroundColor: CustomColors.firebaseNavy,
                   title: Text(title),
                 ),
                 body: SafeArea(
@@ -49,67 +49,47 @@ class _ViewScreenState extends State<ViewItem> {
                           bottom: 24.0,
                         ),
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            icon,
-                            Container(
-                              width: 300,
-                              height: 100,
-                              padding: const EdgeInsets.all(12),
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                color: Colors.blueAccent,
-                                border:
-                                    Border.all(color: Colors.red, width: 4.0),
-                                borderRadius: const BorderRadius.all(
-                                    Radius.circular(8.0)),
+                            const SizedBox(height: 20.0),
+                            RichText(
+                              text: TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text: title.toUpperCase(),
+                                    style: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                        fontFamily: 'Raleway',
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  WidgetSpan(child: icon),
+                                ],
                               ),
-                              child: Expanded(
-                                  flex: 1,
-                                  child: SingleChildScrollView(
-                                    scrollDirection: Axis.vertical,
-                                    child: Text(
-                                      title,
-                                      style: const TextStyle(
-                                          fontSize: 20, color: Colors.white),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  )),
                             ),
-                            Container(
-                              width: 300,
-                              height: 100,
-                              padding: const EdgeInsets.all(12),
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                color: Colors.blueAccent,
-                                border: Border.all(
-                                    color: Color.fromARGB(255, 227, 143, 137),
-                                    width: 4.0),
-                                borderRadius: const BorderRadius.all(
-                                    Radius.circular(8.0)),
+                            const SizedBox(height: 10.0),
+                            RichText(
+                              text: TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text: dateTime,
+                                    style: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 15,
+                                        fontFamily: 'Raleway',
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
                               ),
-                              child: Expanded(
-                                  flex: 1,
-                                  child: SingleChildScrollView(
-                                    scrollDirection: Axis.vertical,
-                                    child: Text(
-                                      dateTime,
-                                      style: const TextStyle(
-                                          fontSize: 32, color: Colors.white),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  )),
                             ),
+                            const SizedBox(height: 20.0),
                             Container(
                               width: 350,
                               height: 200,
                               padding: const EdgeInsets.all(12),
-                              alignment: Alignment.center,
                               decoration: BoxDecoration(
-                                color: Colors.blueAccent,
-                                border:
-                                    Border.all(color: Colors.red, width: 4.0),
+                                border: Border.all(
+                                    color: CustomColors.firebaseGrey
+                                        .withOpacity(0.5)),
                                 borderRadius: const BorderRadius.all(
                                     Radius.circular(8.0)),
                               ),
@@ -117,12 +97,11 @@ class _ViewScreenState extends State<ViewItem> {
                                   flex: 1,
                                   child: SingleChildScrollView(
                                     scrollDirection: Axis.vertical,
-                                    child: Text(
-                                      note,
-                                      style: const TextStyle(
-                                          fontSize: 32, color: Colors.white),
-                                      textAlign: TextAlign.center,
-                                    ),
+                                    child: Text(note,
+                                        style: const TextStyle(
+                                            fontSize: 20,
+                                            fontFamily: 'Raleway',
+                                            fontStyle: FontStyle.italic)),
                                   )),
                             )
                           ],

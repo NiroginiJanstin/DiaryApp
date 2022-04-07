@@ -11,33 +11,33 @@ class AddScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        _dateFocusNode.unfocus();
-        _titleFocusNode.unfocus();
-        _descriptionFocusNode.unfocus();
-      },
-      child: Scaffold(
-        backgroundColor: CustomColors.firebaseNavy,
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: CustomColors.firebaseNavy,
-          title: Text("Add New Record"),
-        ),
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.only(
-              left: 16.0,
-              right: 16.0,
-              bottom: 20.0,
-            ),
-            child: AddItemForm(
-              dateFocusNode : _dateFocusNode,
-              titleFocusNode: _titleFocusNode,
-              descriptionFocusNode: _descriptionFocusNode,
+        onTap: () {
+          _dateFocusNode.unfocus();
+          _titleFocusNode.unfocus();
+          _descriptionFocusNode.unfocus();
+        },
+        child: Scaffold(
+          appBar: AppBar(
+            elevation: 0,
+            title: Text("Add Note"),
+          ),
+          body: SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(),
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  left: 16.0,
+                  right: 16.0,
+                  bottom: 20.0,
+                ),
+                child: AddItemForm(
+                  dateFocusNode: _dateFocusNode,
+                  titleFocusNode: _titleFocusNode,
+                  descriptionFocusNode: _descriptionFocusNode,
+                ),
+              ),
             ),
           ),
-        ),
-      ),
-    );
+        ));
   }
 }
