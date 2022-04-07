@@ -12,11 +12,11 @@ class EditScreen extends StatefulWidget {
   final String documentId;
 
   EditScreen({
-    required this.currentDateTime,
-    required this.currentTitle,
-    required this.currentDescription,
-    required this.currentRating,
-    required this.documentId,
+    this.currentDateTime,
+    this.currentTitle,
+    this.currentDescription,
+    this.currentRating,
+    this.documentId,
   });
 
   @override

@@ -3,14 +3,14 @@ import 'package:diary_app/res/custom_colors.dart';
 
 class CustomFormField extends StatelessWidget {
   const CustomFormField({
-    Key? key,
-    required TextEditingController controller,
-    required FocusNode focusNode,
-    required TextInputType keyboardType,
-    required TextInputAction inputAction,
-    required String label,
-    required String hint,
-    required Function(String value) validator,
+    Key key,
+    TextEditingController controller,
+    FocusNode focusNode,
+    TextInputType keyboardType,
+    TextInputAction inputAction,
+    String label,
+    String hint,
+    Function(String value) validator,
     this.isObscure = false,
     this.isCapitalized = false,
     this.maxLines = 1,
@@ -48,7 +48,7 @@ class CustomFormField extends StatelessWidget {
           isCapitalized ? TextCapitalization.words : TextCapitalization.none,
       textInputAction: _inputAction,
       cursorColor: CustomColors.firebaseYellow,
-      validator: (value) => _validator(value!),
+      validator: (value) => _validator(value),
       decoration: InputDecoration(
         labelText: isLabelEnabled ? _label : null,
         labelStyle: TextStyle(color: CustomColors.firebaseYellow),

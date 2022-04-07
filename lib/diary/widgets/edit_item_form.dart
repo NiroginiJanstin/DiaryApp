@@ -8,7 +8,7 @@ import '../../res/custom_colors.dart';
 import '../../utils/validator.dart';
 import '../common/get_rate_icon.dart';
 import 'custom_form_field.dart';
-import 'package:intl/intl.dart';
+//import 'package:intl/intl.dart';
 
 var date = "";
 var title = "";
@@ -25,14 +25,14 @@ class EditItemForm extends StatefulWidget {
   final String documentId;
 
   const EditItemForm({
-    required this.dateFocusNode,
-    required this.titleFocusNode,
-    required this.descriptionFocusNode,
-    required this.currentTitle,
-    required this.currentDate,
-    required this.currentDescription,
-    required this.currentRating,
-    required this.documentId,
+    this.dateFocusNode,
+    this.titleFocusNode,
+    this.descriptionFocusNode,
+    this.currentTitle,
+    this.currentDate,
+    this.currentDescription,
+    this.currentRating,
+    this.documentId,
   });
 
   @override
@@ -44,9 +44,9 @@ class _EditItemFormState extends State<EditItemForm> {
 
   bool _isProcessing = false;
 
-  late TextEditingController _dateTimeController;
-  late TextEditingController _titleController;
-  late TextEditingController _descriptionController;
+  TextEditingController _dateTimeController;
+  TextEditingController _titleController;
+  TextEditingController _descriptionController;
 
   @override
   void initState() {
@@ -95,11 +95,11 @@ class _EditItemFormState extends State<EditItemForm> {
                   onTap: () async {
                     DatePicker.showDateTimePicker(context,
                         showTitleActions: true, onChanged: (date) {
-                      String formattedDate =
-                          DateFormat('yyyy-MM-dd hh:mm a').format(date);
+                      // String formattedDate =
+                      //     DateFormat('yyyy-MM-dd hh:mm a').format(date);
                       setState(() {
-                        _dateTimeController.text =
-                            formattedDate; //set output date to TextField value.
+                        _dateTimeController.text = date.toString();
+                        //set output date to TextField value.
                       });
                     }, onConfirm: (date) {}, currentTime: DateTime.now());
                   },
@@ -180,7 +180,7 @@ class _EditItemFormState extends State<EditItemForm> {
                       widget.titleFocusNode.unfocus();
                       widget.descriptionFocusNode.unfocus();
 
-                      if (_editItemFormKey.currentState!.validate()) {
+                      if (_editItemFormKey.currentState.validate()) {
                         setState(() {
                           _isProcessing = true;
                         });

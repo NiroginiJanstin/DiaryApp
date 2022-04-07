@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:diary_app/res/custom_colors.dart';
 import 'package:diary_app/utils/validator.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'package:intl/intl.dart';
+//import 'package:intl/intl.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import 'custom_form_field.dart';
@@ -21,9 +21,9 @@ class AddItemForm extends StatefulWidget {
   final FocusNode descriptionFocusNode;
 
   const AddItemForm({
-    required this.dateFocusNode,
-    required this.titleFocusNode,
-    required this.descriptionFocusNode,
+    this.dateFocusNode,
+    this.titleFocusNode,
+    this.descriptionFocusNode,
   });
 
   @override
@@ -77,11 +77,11 @@ class _AddItemFormState extends State<AddItemForm> {
                   onTap: () async {
                     DatePicker.showDateTimePicker(context,
                         showTitleActions: true, onChanged: (date) {
-                      String formattedDate =
-                          DateFormat('yyyy-MM-dd hh:mm a').format(date);
+                      // String formattedDate =
+                      //     DateFormat('yyyy-MM-dd hh:mm a').format(date);
                       setState(() {
-                        _dateTimeController.text =
-                            formattedDate; //set output date to TextField value.
+                        _dateTimeController.text = date
+                            .toString(); //set output date to TextField value.
                       });
                       print('change $date in time zone ' +
                           date.timeZoneOffset.inHours.toString());
@@ -166,7 +166,7 @@ class _AddItemFormState extends State<AddItemForm> {
                       widget.titleFocusNode.unfocus();
                       widget.descriptionFocusNode.unfocus();
 
-                      if (_addItemFormKey.currentState!.validate()) {
+                      if (_addItemFormKey.currentState.validate()) {
                         setState(() {
                           _isProcessing = true;
                         });
@@ -185,7 +185,7 @@ class _AddItemFormState extends State<AddItemForm> {
                       }
                     },
                     child: Padding(
-                      padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
+                      padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
                       child: Text(
                         'ADD',
                         style: TextStyle(

@@ -1,8 +1,8 @@
+import 'package:diary_app/todo/provider/todos.dart';
 import 'package:diary_app/user/login.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -11,18 +11,19 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({Key key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown
-    ]);
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: login()
-    );
-  }
+  Widget build(BuildContext context) => ChangeNotifierProvider(
+        create: (context) => TodosProvider(),
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: "My Diary",
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+            scaffoldBackgroundColor: const Color(0xFFf6f5ee),
+          ),
+          home: const login(),
+        ),
+      );
 }
-

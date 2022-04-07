@@ -1,4 +1,5 @@
 import 'package:diary_app/diary/diary_home.dart';
+import 'package:diary_app/todo/page/todo_home_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -7,7 +8,7 @@ void main() {
 
 // ignore: camel_case_types
 class home extends StatelessWidget {
-  const home({Key? key}) : super(key: key);
+  const home({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +48,11 @@ class home extends StatelessWidget {
               leading: const Icon(Icons.local_activity),
               title: const Text("To-do"),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => ToDoHomePage(),
+                  ),
+                );
               },
             ),
             ListTile(

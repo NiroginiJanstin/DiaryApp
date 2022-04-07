@@ -5,13 +5,10 @@ final CollectionReference _recordsCollection =
     _firestore.collection('DiaryRecords');
 
 class DiaryCrud {
-  static String? userUid;
+  static String userUid;
 
   static Future<void> addItem(
-      {required String dateTime,
-      required String title,
-      required String note,
-      required double rating}) async {
+      {String dateTime, String title, String note, double rating}) async {
     Map<String, dynamic> data = <String, dynamic>{
       "dateTime": dateTime,
       "title": title,
@@ -26,11 +23,11 @@ class DiaryCrud {
   }
 
   static Future<void> updateItem({
-    required String dateTime,
-    required String title,
-    required String note,
-    required double rating,
-    required String docId,
+    String dateTime,
+    String title,
+    String note,
+    double rating,
+    String docId,
   }) async {
     Map<String, dynamic> data = <String, dynamic>{
       "docId": docId,
@@ -55,8 +52,14 @@ class DiaryCrud {
     return _recordsCollection.doc(docId).snapshots();
   }
 
+  static Stream<QuerySnapshot> searchItems(keyWord) {
+    return _recordsCollection
+        .where("title", arrayContains: keyWord)
+        .snapshots();
+  }
+
   static Future<void> deleteItem({
-    required String docId,
+    String docId,
   }) async {
     await _recordsCollection
         .doc(docId)

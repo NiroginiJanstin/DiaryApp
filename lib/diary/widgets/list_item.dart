@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import '../../res/custom_colors.dart';
 import '../common/get_rate_icon.dart';
 import '../edit_record.dart';
-import 'package:google_fonts/google_fonts.dart';
+//import 'package:google_fonts/google_fonts.dart';
 
 class ListItem extends StatelessWidget {
-  const ListItem({Key? key}) : super(key: key);
+  const ListItem({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +20,11 @@ class ListItem extends StatelessWidget {
         } else if (snapshot.hasData || snapshot.data != null) {
           return ListView.separated(
             separatorBuilder: (context, index) => const SizedBox(height: 16.0),
-            itemCount: snapshot.data!.docs.length,
+            itemCount: snapshot.data.docs.length,
             itemBuilder: (context, index) {
               var noteInfo =
-                  snapshot.data!.docs[index].data()! as Map<String, dynamic>;
-              String docID = snapshot.data!.docs[index].id;
+                  snapshot.data.docs[index].data() as Map<String, dynamic>;
+              String docID = snapshot.data.docs[index].id;
               String dateTime = noteInfo['dateTime'];
               String title = noteInfo['title'];
               String note = noteInfo['note'];
@@ -69,13 +69,13 @@ class ListItem extends StatelessWidget {
                             children: [
                               Text(
                                 dateTime,
-                                style: GoogleFonts.lato(
-                                  textStyle:
-                                      Theme.of(context).textTheme.headline4,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w700,
-                                  fontStyle: FontStyle.normal,
-                                ),
+                                // style: GoogleFonts.lato(
+                                //   textStyle:
+                                //       Theme.of(context).textTheme.headline4,
+                                //   fontSize: 14,
+                                //   fontWeight: FontWeight.w700,
+                                //   fontStyle: FontStyle.normal,
+                                // ),
                               ),
                             ],
                           ),
@@ -85,12 +85,12 @@ class ListItem extends StatelessWidget {
                             title.toUpperCase(),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: GoogleFonts.lato(
-                              textStyle: Theme.of(context).textTheme.headline4,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700,
-                              fontStyle: FontStyle.normal,
-                            ),
+                            // style: GoogleFonts.lato(
+                            //   textStyle: Theme.of(context).textTheme.headline4,
+                            //   fontSize: 16,
+                            //   fontWeight: FontWeight.w700,
+                            //   fontStyle: FontStyle.normal,
+                            // ),
                           ),
                           //   ],
                           // ),
