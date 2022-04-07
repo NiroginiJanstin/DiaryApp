@@ -37,7 +37,6 @@ class _ViewScreenState extends State<ViewItem> {
 
             return Scaffold(
                 appBar: AppBar(
-                  elevation: 0,
                   title: Text(title),
                 ),
                 body: SafeArea(

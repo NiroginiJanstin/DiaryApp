@@ -1,5 +1,6 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:diary_app/common/home.dart';
 import 'package:diary_app/diary/diary_home.dart';
 import 'package:diary_app/utils/diary_collection_crud.dart';
 import 'package:flutter/material.dart';
@@ -289,7 +290,7 @@ Widget _buildPopupDialog(BuildContext context) {
             DiaryCrud.addItem(
                 dateTime: date, title: title, note: note, rating: rating - 1);
             Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => diaryHome()));
+                MaterialPageRoute(builder: (context) => home()));
           },
         )
       ],
