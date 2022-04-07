@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
+import '../../common/home.dart';
 import '../../res/custom_colors.dart';
 import '../../utils/validator.dart';
 import '../common/get_rate_icon.dart';
@@ -315,7 +316,7 @@ Widget _buildPopupDialog(BuildContext context, String docId) {
                 note: note,
                 rating: rating);
             Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => diaryHome()));
+                MaterialPageRoute(builder: (context) => home()));
           },
         )
       ],

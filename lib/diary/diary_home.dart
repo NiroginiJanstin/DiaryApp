@@ -40,7 +40,6 @@ class _diaryHomeState extends State<diaryHome> {
                     labelText: "Search",
                     hintText: "Search",
                     prefixIcon: Icon(Icons.search),
-                    suffixIcon: Icon(Icons.calendar_today),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(25.0)))),
               )),

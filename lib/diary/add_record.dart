@@ -18,7 +18,6 @@ class AddScreen extends StatelessWidget {
         },
         child: Scaffold(
           appBar: AppBar(
-            elevation: 0,
             title: Text("Add Note"),
           ),
           body: SingleChildScrollView(
