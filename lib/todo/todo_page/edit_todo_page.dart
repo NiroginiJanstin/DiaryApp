@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../model/todo.dart';
-import '../provider/todos.dart';
-import '../widget/todo_form_widget.dart';
+import '../todo_model/todo.dart';
+import '../todo_provider/todos.dart';
+import '../todo_widget/todo_form_widget.dart';
 
 class EditTodoPage extends StatefulWidget {
   final Todo todo;

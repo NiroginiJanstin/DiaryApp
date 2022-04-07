@@ -1,5 +1,5 @@
 import 'package:diary_app/diary/diary_home.dart';
-import 'package:diary_app/todo/page/todo_home_page.dart';
+import 'package:diary_app/todo/todo_page/todo_home_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {

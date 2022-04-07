@@ -1,4 +1,4 @@
-import 'package:diary_app/todo/provider/todos.dart';
+import 'package:diary_app/todo/todo_provider/todos.dart';
 import 'package:diary_app/user/login.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';

@@ -1,9 +1,9 @@
-import 'package:diary_app/todo/widget/todo_form_widget.dart';
+import 'package:diary_app/todo/todo_widget/todo_form_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../model/todo.dart';
-import '../provider/todos.dart';
+import '../todo_model/todo.dart';
+import '../todo_provider/todos.dart';
 
 class AddTodoDialogWidget extends StatefulWidget {
   @override

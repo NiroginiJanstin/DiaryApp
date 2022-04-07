@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../utils/timie_utils.dart';
-import '../model/todo.dart';
+import '../todo_model/todo.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
-import '../page/edit_todo_page.dart';
-import '../provider/todos.dart';
+import '../todo_page/edit_todo_page.dart';
+import '../todo_provider/todos.dart';
 
 class TodoWidget extends StatelessWidget {
   final Todo todo;

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../utils/todo_collection.dart';
-import '../model/todo.dart';
-import '../provider/todos.dart';
-import '../widget/add_todo_dialog_widget.dart';
-import '../widget/completed_list_widget.dart';
-import '../widget/todo_list_widget.dart';
+import '../todo_model/todo.dart';
+import '../todo_provider/todos.dart';
+import '../todo_widget/add_todo_dialog_widget.dart';
+import '../todo_widget/completed_list_widget.dart';
+import '../todo_widget/todo_list_widget.dart';
 
 class ToDoHomePage extends StatefulWidget {
   @override
