@@ -81,15 +81,61 @@ class _EditItemFormState extends State<EditItemForm> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const SizedBox(height: 10.0),
                 icon,
-                const SizedBox(height: 2.0),
-                TextField(
+                const SizedBox(height: 10.0),
+                Text(
+                  'Date',
+                  style: TextStyle(
+                    color: CustomColors.firebaseGrey,
+                    fontSize: 15.0,
+                    letterSpacing: 1,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 10.0),
+                TextFormField(
                   controller:
                       _dateTimeController, //editing controller of this TextField
-                  decoration: const InputDecoration(
-                      icon: Icon(Icons.calendar_today), //icon of text field
-                      labelText: "Enter Date" //label text of field
+                  decoration: InputDecoration(
+                    suffixIcon: const Icon(Icons.calendar_today),
+                    labelText: "Enter Date",
+                    labelStyle: TextStyle(color: CustomColors.firebaseYellow),
+                    errorStyle: const TextStyle(
+                      color: Colors.redAccent,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                      borderSide: BorderSide(
+                        color: CustomColors.firebaseAmber,
+                        width: 2,
                       ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                      borderSide: BorderSide(
+                        color: CustomColors.firebaseGrey.withOpacity(0.5),
+                      ),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                      borderSide: const BorderSide(
+                        color: Colors.redAccent,
+                        width: 2,
+                      ),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                      borderSide: const BorderSide(
+                        color: Colors.redAccent,
+                        width: 2,
+                      ),
+                    ),
+                  ),
+                  validator: (value) => Validator.validateField(
+                    value: value,
+                  ),
                   readOnly:
                       true, //set it true, so that user will not able to edit text
                   onTap: () async {
@@ -104,17 +150,16 @@ class _EditItemFormState extends State<EditItemForm> {
                     }, onConfirm: (date) {}, currentTime: DateTime.now());
                   },
                 ),
-                const SizedBox(height: 10.0),
+                const SizedBox(height: 20.0),
                 Text(
                   'Title',
                   style: TextStyle(
                     color: CustomColors.firebaseGrey,
-                    fontSize: 22.0,
+                    fontSize: 15.0,
                     letterSpacing: 1,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 4.0),
                 CustomFormField(
                   isLabelEnabled: false,
                   controller: _titleController,
@@ -127,19 +172,19 @@ class _EditItemFormState extends State<EditItemForm> {
                   label: 'Title',
                   hint: 'Enter your note title',
                 ),
-                const SizedBox(height: 10.0),
+                const SizedBox(height: 20.0),
                 Text(
                   'Description',
                   style: TextStyle(
                     color: CustomColors.firebaseGrey,
-                    fontSize: 22.0,
+                    fontSize: 15.0,
                     letterSpacing: 1,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 4.0),
+                const SizedBox(height: 10.0),
                 CustomFormField(
-                  maxLines: 10,
+                  maxLines: 5,
                   isLabelEnabled: false,
                   controller: _descriptionController,
                   focusNode: widget.descriptionFocusNode,
@@ -205,7 +250,7 @@ class _EditItemFormState extends State<EditItemForm> {
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
-                          color: CustomColors.firebaseGrey,
+                          color: CustomColors.white,
                           letterSpacing: 2,
                         ),
                       ),
