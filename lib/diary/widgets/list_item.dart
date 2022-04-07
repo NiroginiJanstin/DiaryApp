@@ -52,12 +52,13 @@ class ListItem extends StatelessWidget {
                       leading: icon,
                       trailing: IconButton(
                         icon: const Icon(Icons.edit),
-                        color: const Color.fromARGB(255, 228, 119, 119),
+                        color: const Color.fromARGB(255, 106, 101, 101),
                         onPressed: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) => EditScreen(
                                 currentDateTime: dateTime,
+                                actTime : noteInfo['dateTime'].toDate(),
                                 currentTitle: title,
                                 currentDescription: note,
                                 currentRating: rate.toString(),
@@ -74,6 +75,10 @@ class ListItem extends StatelessWidget {
                             children: [
                               Text(
                                 dateTime,
+                                style: const TextStyle(
+                                    color: Color.fromARGB(255, 138, 138, 138),
+                                    fontStyle: FontStyle.italic
+                                ),
                               ),
                             ],
                           ),
@@ -83,6 +88,11 @@ class ListItem extends StatelessWidget {
                             title.toUpperCase(),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                                color: Color(0xFF4285F4),
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold
+                            ),
                           ),
                           //   ],
                           // ),
@@ -92,6 +102,10 @@ class ListItem extends StatelessWidget {
                         note,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                            color: Colors.black,
+                          fontSize: 20
+                        ),
                       ),
                     ),
                   ));

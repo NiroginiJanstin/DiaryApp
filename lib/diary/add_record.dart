@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:diary_app/res/custom_colors.dart';
-
 import 'widgets/add_item_form.dart';
 
 class AddScreen extends StatelessWidget {

@@ -9,10 +9,11 @@ import 'package:diary_app/utils/validator.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 //import 'package:intl/intl.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:intl/intl.dart';
 
 import 'custom_form_field.dart';
 
-var date = "";
+DateTime date = DateTime.now();
 var title = "";
 var note = "";
 
@@ -35,6 +36,7 @@ class _AddItemFormState extends State<AddItemForm> {
   final _addItemFormKey = GlobalKey<FormState>();
 
   bool _isProcessing = false;
+  DateTime actualDateVal = DateTime.now();
 
   final TextEditingController _dateTimeController = TextEditingController();
   final TextEditingController _titleController = TextEditingController();
@@ -114,11 +116,11 @@ class _AddItemFormState extends State<AddItemForm> {
                   onTap: () async {
                     DatePicker.showDateTimePicker(context,
                         showTitleActions: true, onChanged: (date) {
-                      // String formattedDate =
-                      //     DateFormat('yyyy-MM-dd hh:mm a').format(date);
+                          String dateString = DateFormat('yyyy-MM-dd hh:mm a').format(date);
                       setState(() {
-                        _dateTimeController.text = date
+                        _dateTimeController.text = dateString
                             .toString(); //set output date to TextField value.
+                        actualDateVal = date;
                       });
                       print('change $date in time zone ' +
                           date.timeZoneOffset.inHours.toString());
@@ -209,7 +211,7 @@ class _AddItemFormState extends State<AddItemForm> {
                           _isProcessing = true;
                         });
 
-                        date = _dateTimeController.text;
+                        date = actualDateVal;
                         title = _titleController.text;
                         note = _descriptionController.text;
                         showDialog(

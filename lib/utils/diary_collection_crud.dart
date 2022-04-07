@@ -8,9 +8,9 @@ class DiaryCrud {
   static String userUid;
 
   static Future<void> addItem(
-      {String dateTime, String title, String note, double rating}) async {
+      {DateTime dateTime, String title, String note, double rating}) async {
     Map<String, dynamic> data = <String, dynamic>{
-      "dateTime": DateTime.parse(dateTime),
+      "dateTime": dateTime,
       "title": title,
       "note": note,
       "rating": rating
@@ -23,7 +23,7 @@ class DiaryCrud {
   }
 
   static Future<void> updateItem({
-    String dateTime,
+    DateTime dateTime,
     String title,
     String note,
     double rating,
@@ -31,11 +31,13 @@ class DiaryCrud {
   }) async {
     Map<String, dynamic> data = <String, dynamic>{
       "docId": docId,
-      "dateTime": DateTime.parse(dateTime),
+      "dateTime": dateTime,
       "title": title,
       "rating": rating,
       "note": note,
     };
+
+    print("Update Data"+data.toString());
 
     await _recordsCollection
         .doc(docId)
@@ -45,17 +47,17 @@ class DiaryCrud {
   }
 
   static Stream<QuerySnapshot> readItems() {
-    return _recordsCollection.orderBy('dateTime', descending: true).
-    snapshots();
+    return _recordsCollection.orderBy('dateTime', descending: true)
+        .snapshots();
   }
 
   static Stream<DocumentSnapshot> readOneItem(docId) {
     return _recordsCollection.doc(docId).snapshots();
   }
 
-  static Stream<QuerySnapshot> searchItems(keyWord) {
-    return _recordsCollection
-        .where("title", arrayContains: keyWord)
+  static Stream<QuerySnapshot> searchItems(String searchKey) {
+    return _recordsCollection.where('title', isGreaterThanOrEqualTo: searchKey)
+        .where('title', isLessThan: searchKey +'z')
         .snapshots();
   }
 

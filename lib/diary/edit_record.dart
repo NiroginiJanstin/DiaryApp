@@ -2,14 +2,13 @@ import 'package:diary_app/diary/widgets/edit_item_form.dart';
 import 'package:diary_app/utils/diary_collection_crud.dart';
 import 'package:flutter/material.dart';
 
-import '../res/custom_colors.dart';
-
 class EditScreen extends StatefulWidget {
   final String currentDateTime;
   final String currentTitle;
   final String currentDescription;
   final String currentRating;
   final String documentId;
+  final DateTime actTime;
 
   EditScreen({
     this.currentDateTime,
@@ -17,6 +16,7 @@ class EditScreen extends StatefulWidget {
     this.currentDescription,
     this.currentRating,
     this.documentId,
+    this.actTime
   });
 
   @override
@@ -95,6 +95,7 @@ class _EditScreenState extends State<EditScreen> {
                     dateFocusNode: _dateTimeFocusNode,
                     titleFocusNode: _titleFocusNode,
                     descriptionFocusNode: _descriptionFocusNode,
+                    oldTime : widget.actTime,
                     currentDate: widget.currentDateTime,
                     currentTitle: widget.currentTitle,
                     currentDescription: widget.currentDescription,

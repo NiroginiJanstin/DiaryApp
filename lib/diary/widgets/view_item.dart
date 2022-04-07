@@ -28,8 +28,11 @@ class _ViewScreenState extends State<ViewItem> {
             return Text('Error = ${snapshot.error}');
           } else if (snapshot.hasData) {
             var noteInfo = snapshot.data.data();
-            print(noteInfo['dateTime']);
-            String dateTime = noteInfo['dateTime'].toString();
+            final Timestamp timestamp = noteInfo['dateTime'] as Timestamp;
+            final DateTime val = timestamp.toDate();
+            final dateString = DateFormat('yyyy-MM-dd hh:mm a').format(val);
+
+            String dateTime = dateString;
             String title = noteInfo['title'];
             String note = noteInfo['note'];
             double rating = noteInfo['rating'];

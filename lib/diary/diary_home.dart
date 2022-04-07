@@ -30,20 +30,11 @@ class _diaryHomeState extends State<diaryHome> {
         ),
       ),
       body: Column(
-        children: <Widget>[
+        children: const <Widget>[
           Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                onChanged: (value) {},
-                controller: _searchController,
-                decoration: const InputDecoration(
-                    labelText: "Search",
-                    hintText: "Search",
-                    prefixIcon: Icon(Icons.search),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(25.0)))),
-              )),
-          const Expanded(
+              padding: EdgeInsets.all(8.0),
+          ),
+          Expanded(
             child: ListItem(),
           )
         ],
