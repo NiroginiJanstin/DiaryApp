@@ -313,7 +313,7 @@ Widget _buildPopupDialog(BuildContext context, String docId) {
                 dateTime: date,
                 title: title,
                 note: note,
-                rating: rating);
+                rating: rating - 1);
             Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => diaryHome()));
           },

@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:diary_app/diary/common/get_rate_icon.dart';
 import 'package:diary_app/utils/diary_collection_crud.dart';
 import 'package:flutter/material.dart';
-
+import 'package:intl/intl.dart';
 import '../../res/custom_colors.dart';
 
 class ViewItem extends StatefulWidget {
@@ -27,8 +27,9 @@ class _ViewScreenState extends State<ViewItem> {
           if (snapshot.hasError) {
             return Text('Error = ${snapshot.error}');
           } else if (snapshot.hasData) {
-            var noteInfo = snapshot.data.data() as Map<String, dynamic>;
-            String dateTime = noteInfo['dateTime'];
+            var noteInfo = snapshot.data.data();
+            print(noteInfo['dateTime']);
+            String dateTime = noteInfo['dateTime'].toString();
             String title = noteInfo['title'];
             String note = noteInfo['note'];
             double rating = noteInfo['rating'];

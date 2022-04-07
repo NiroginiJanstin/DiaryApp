@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import '../../res/custom_colors.dart';
 import '../common/get_rate_icon.dart';
 import '../edit_record.dart';
-//import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 class ListItem extends StatelessWidget {
   const ListItem({Key key}) : super(key: key);
@@ -23,9 +23,14 @@ class ListItem extends StatelessWidget {
             itemCount: snapshot.data.docs.length,
             itemBuilder: (context, index) {
               var noteInfo =
-                  snapshot.data.docs[index].data() as Map<String, dynamic>;
+                  snapshot.data.docs[index].data();
               String docID = snapshot.data.docs[index].id;
-              String dateTime = noteInfo['dateTime'];
+
+              final Timestamp timestamp = noteInfo['dateTime'] as Timestamp;
+              final DateTime val = timestamp.toDate();
+              final dateString = DateFormat('yyyy-MM-dd hh:mm a').format(val);
+
+              String dateTime = dateString;
               String title = noteInfo['title'];
               String note = noteInfo['note'];
               double rate = noteInfo['rating'];
@@ -69,13 +74,6 @@ class ListItem extends StatelessWidget {
                             children: [
                               Text(
                                 dateTime,
-                                // style: GoogleFonts.lato(
-                                //   textStyle:
-                                //       Theme.of(context).textTheme.headline4,
-                                //   fontSize: 14,
-                                //   fontWeight: FontWeight.w700,
-                                //   fontStyle: FontStyle.normal,
-                                // ),
                               ),
                             ],
                           ),
@@ -85,31 +83,11 @@ class ListItem extends StatelessWidget {
                             title.toUpperCase(),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            // style: GoogleFonts.lato(
-                            //   textStyle: Theme.of(context).textTheme.headline4,
-                            //   fontSize: 16,
-                            //   fontWeight: FontWeight.w700,
-                            //   fontStyle: FontStyle.normal,
-                            // ),
                           ),
                           //   ],
                           // ),
                         ],
                       ),
-                      //const Spacer(), // use Spacer
-                      // Text(
-                      //   dateTime,
-                      //   maxLines: 1,
-                      //   overflow: TextOverflow.ellipsis,
-                      //   style: GoogleFonts.lato(
-                      //     textStyle: Theme.of(context).textTheme.headline3,
-                      //     fontSize: 13,
-                      //     fontWeight: FontWeight.w400,
-                      //     fontStyle: FontStyle.italic,
-                      //   ),
-                      //),
-                      //],
-                      //),
                       subtitle: Text(
                         note,
                         maxLines: 1,

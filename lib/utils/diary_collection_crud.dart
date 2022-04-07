@@ -10,7 +10,7 @@ class DiaryCrud {
   static Future<void> addItem(
       {String dateTime, String title, String note, double rating}) async {
     Map<String, dynamic> data = <String, dynamic>{
-      "dateTime": dateTime,
+      "dateTime": DateTime.parse(dateTime),
       "title": title,
       "note": note,
       "rating": rating
@@ -31,7 +31,7 @@ class DiaryCrud {
   }) async {
     Map<String, dynamic> data = <String, dynamic>{
       "docId": docId,
-      "dateTime": dateTime,
+      "dateTime": DateTime.parse(dateTime),
       "title": title,
       "rating": rating,
       "note": note,
@@ -45,7 +45,8 @@ class DiaryCrud {
   }
 
   static Stream<QuerySnapshot> readItems() {
-    return _recordsCollection.snapshots();
+    return _recordsCollection.orderBy('dateTime', descending: true).
+    snapshots();
   }
 
   static Stream<DocumentSnapshot> readOneItem(docId) {

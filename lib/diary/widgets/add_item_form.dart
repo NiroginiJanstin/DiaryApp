@@ -287,7 +287,7 @@ Widget _buildPopupDialog(BuildContext context) {
           },
           onRatingUpdate: (rating) {
             DiaryCrud.addItem(
-                dateTime: date, title: title, note: note, rating: rating);
+                dateTime: date, title: title, note: note, rating: rating - 1);
             Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => diaryHome()));
           },
